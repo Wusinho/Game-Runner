@@ -29,6 +29,7 @@
     "@babel/preset-env": "^7.14.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
@@ -36,6 +37,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   }
 }
