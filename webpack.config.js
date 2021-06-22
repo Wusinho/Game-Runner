@@ -1,31 +1,29 @@
-
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require("webpack");
+const path = require("path");
 
 module.exports = {
-
-  entry: './src/index.js',
+  entry: "./src/index.js",
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'project.bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "project.bundle.js",
   },
 
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
 
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: 'url-loader',
+        use: "url-loader",
       },
 
       {
         test: [/\.vert$/, /\.frag$/],
-        use: 'raw-loader',
+        use: "raw-loader",
       },
     ],
   },
@@ -36,5 +34,4 @@ module.exports = {
       WEBGL_RENDERER: JSON.stringify(true),
     }),
   ],
-
 };
