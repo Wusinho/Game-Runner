@@ -59,10 +59,9 @@ export default class GameScene extends Phaser.Scene {
     });
 
     cursors = this.input.keyboard.createCursorKeys();
-
     stars = this.physics.add.group({
       key: "star",
-      repeat: 3,
+      repeat: 0,
       setXY: { x: 80, y: 100, stepX: 200 },
     });
 
@@ -92,7 +91,7 @@ export default class GameScene extends Phaser.Scene {
     } else if (cursors.right.isDown) {
       player.setVelocityX(160);
       player.anims.play("right", true);
-    } else if (cursors.up.isDown && player.body.touching.down) {
+    } else if (cursors.space.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     } else {
       player.setVelocityX(0);
@@ -132,6 +131,9 @@ function hitBomb(player, bomb) {
   player.anims.play("turn");
 
   gameOver = true;
+  if (gameOver) {
+    this.scene.start("game-over", "game-over");
+  }
 }
 
 function addPlatform(X, Y, plat, scale) {
