@@ -1,5 +1,7 @@
-import Phaser from "phaser";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "./main.scss";
 
+import Phaser from "phaser";
 import Model from "./Model";
 import config from "./Config/config";
 import GameScene from "./Scenes/GameScene";

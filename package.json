@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/Wusinho/Game-Runner#readme",
   "dependencies": {
-    "phaser": "^3.55.2"
+    "bootstrap": "^5.0.2",
+    "jquery": "^3.6.0",
+    "phaser": "^3.55.2",
+    "popper.js": "^1.16.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
