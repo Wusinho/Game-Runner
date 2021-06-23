@@ -1,17 +1,6 @@
 import Phaser from "phaser";
 import config from "../Config/config";
 
-// const gameOptions = {
-//   player: "",
-//   stars: "",
-//   platforms: "",
-//   cursors: "",
-//   score: 0,
-//   scoreText: "",
-//   gameOver: false,
-//   bombs: "",
-// };
-
 var player;
 var platforms;
 var stars;
@@ -46,7 +35,6 @@ export default class GameScene extends Phaser.Scene {
     addPlatform(750, 220, platforms);
 
     player = this.physics.add.sprite(100, 450, "dude");
-    console.dir(player);
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
