@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -51,6 +52,10 @@ module.exports = {
           "sass-loader",
         ],
       },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
     ],
   },
 
@@ -58,6 +63,11 @@ module.exports = {
     new webpack.DefinePlugin({
       CANVAS_RENDERER: JSON.stringify(true),
       WEBGL_RENDERER: JSON.stringify(true),
+    }),
+    new HtmlWebpackPlugin({
+      //   appMountId: "app",
+      //   filename: "index.html",
+      template: "./src/index.html",
     }),
   ],
 };
