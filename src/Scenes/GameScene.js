@@ -13,14 +13,13 @@ import config from "../Config/config";
 // };
 
 var player;
-var stars;
 var platforms;
+var stars;
 var cursors;
 var score = 0;
 var scoreText;
 var gameOver = false;
 var bombs;
-
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
@@ -41,15 +40,13 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(400, 300, "sky");
 
     platforms = this.physics.add.staticGroup();
-
-    platforms.create(400, 568, "ground").setScale(2).refreshBody();
-
-    platforms.create(600, 400, "ground");
-    platforms.create(50, 250, "ground");
-    platforms.create(750, 220, "ground");
+    addPlatform(400, 568, platforms, 2);
+    addPlatform(600, 400, platforms);
+    addPlatform(50, 250, platforms);
+    addPlatform(750, 220, platforms);
 
     player = this.physics.add.sprite(100, 450, "dude");
-
+    console.dir(player);
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
@@ -91,7 +88,6 @@ export default class GameScene extends Phaser.Scene {
       fontSize: "32px",
       fill: "#000",
     });
-
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
@@ -104,17 +100,14 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
-
       player.anims.play("left", true);
     } else if (cursors.right.isDown) {
       player.setVelocityX(160);
-
       player.anims.play("right", true);
     } else if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     } else {
       player.setVelocityX(0);
-
       player.anims.play("turn");
     }
   }
@@ -151,4 +144,12 @@ function hitBomb(player, bomb) {
   player.anims.play("turn");
 
   gameOver = true;
+}
+
+function addPlatform(X, Y, plat, scale) {
+  if (scale) {
+    return plat.create(X, Y, "ground").setScale(scale).refreshBody();
+  } else {
+    return plat.create(X, Y, "ground");
+  }
 }
