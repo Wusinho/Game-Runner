@@ -35,7 +35,7 @@ export default class GameScene extends Phaser.Scene {
     addPlatform(750, 220, platforms);
 
     player = this.physics.add.sprite(100, 450, "dude");
-    player.setBounce(0.9);
+    player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
     this.anims.create({
