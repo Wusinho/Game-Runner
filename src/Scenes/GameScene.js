@@ -69,20 +69,27 @@ export default class GameScene extends Phaser.Scene {
 
     this.input.on("pointerdown", this.jump, this);
 
-    this.star = this.physics.add.group({
-      key: "star",
-      repeat: 11,
-      setXY: { x: 12, y: 0, stepX: 70 },
-    });
-    console.log(this.star.children.entries.length);
+    // this.star = this.physics.add.group({
+    //   key: "star",
+    //   repeat: 11,
+    //   setXY: { x: 12, y: 0, stepX: 70 },
+    // });
+    // console.log(this.star.children.entries.length);
 
-    this.star.children.iterate(function (child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-      child.setGravity(-5, 100);
-      child.setBounce(1);
-      child.setCollideWorldBounds(true);
-      child.setVelocity(Phaser.Math.Between(-200, 200), 100);
-    });
+    // this.star.children.iterate(function (child) {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    //   child.setGravity(-5, 100);
+    //   child.setBounce(1);
+    //   child.setCollideWorldBounds(true);
+    //   child.setVelocity(Phaser.Math.Between(-200, 200), 100);
+    // });
+
+    this.star = this.physics.add.sprite(100, 450, "star");
+    this.star
+      .setGravity(-5, 100)
+      .setBounce(1)
+      .setCollideWorldBounds(true)
+      .setVelocity(Phaser.Math.Between(-200, 200), 100);
 
     this.bombs = this.physics.add.group();
 
@@ -158,7 +165,7 @@ export default class GameScene extends Phaser.Scene {
   }
 }
 
-function collectStar() {
+function collectStar(_player, _star) {
   this.star.disableBody(true, true);
 
   const valueBefore = gameOptions.score;
