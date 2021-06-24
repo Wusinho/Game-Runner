@@ -1,15 +1,10 @@
 import Phaser from "phaser";
 import config from "../Config/config";
 
-// var gamer;
-// var platforms;
-// var stars;
-// var cursors;
-// var score = 0;
-// var scoreText;
-// var gameOver = false;
-// var bombs;
-// var floor;
+const getScoreBox = document.getElementById("scoreBox");
+
+var gameOver = false;
+
 let gameOptions = {
   platformStartSpeed: 350,
   spawnRange: [100, 350],
@@ -17,7 +12,7 @@ let gameOptions = {
   playerGravity: 900,
   jumpForce: 400,
   playerStartPosition: 200,
-  jumps: 2,
+  jumps: 200,
   score: 0,
   scoreText: "",
 };
@@ -50,12 +45,6 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
-    this.starGroup = this.add.group({
-      removeCallback: function (star) {
-        star.scene.starPool.add(star);
-      },
-    });
-
     this.platformPool = this.add.group({
       // once a platform is removed from the pool, it's added to the active platforms group
       removeCallback: function (platform) {
@@ -63,13 +52,7 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
-    this.starPool = this.add.group({
-      removeCallback: function (star) {
-        star.scene.starGroup.add(star);
-      },
-    });
-
-    this.playerJumps = 1;
+    this.playerJumps = 200;
     this.scoreText = "";
 
     this.addPlatform(config.width, config.width / 2);
@@ -86,19 +69,26 @@ export default class GameScene extends Phaser.Scene {
 
     this.input.on("pointerdown", this.jump, this);
 
-    this.star = this.physics.add.sprite(200, 450, "star");
-    // this.star;
-    // .setGravity(-5, 100)
-    // .setCollideWorldBounds(true)
-    // .setBounce(1)
-    // .setVelocity(Phaser.Math.Between(-200, 200), 20);
-    // this.physics.add.collider(this.stars, platforms);
+    this.star = this.physics.add.group({
+      key: "star",
+      repeat: 11,
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    this.star.children.iterate(function (child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      child.setGravity(-5, 100);
+      child.setBounce(1);
+      child.setCollideWorldBounds(true);
+      child.setVelocity(Phaser.Math.Between(-200, 200), 100);
+    });
+
+    this.bombs = this.physics.add.group();
+
+    this.physics.add.collider(this.star, this.platformGroup);
 
     this.physics.add.overlap(this.player, this.star, collectStar, null, this);
-    this.scoreText = this.add.text(10, 10, "score: 0", {
-      fontSize: "32px",
-      fill: "#000",
-    });
+    this.physics.add.collider(this.player, this.bombs, hitBomb, null, this);
   }
 
   jump() {
@@ -117,6 +107,8 @@ export default class GameScene extends Phaser.Scene {
   update() {
     //gameOver
     if (this.player.y > config.height) {
+      gameOptions.scoreText = 0;
+      getScoreBox.innerText = 0;
       this.scene.start("game-over", "game-over");
     }
     this.player.x = gameOptions.playerStartPosition;
@@ -143,49 +135,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  collectStar() {
-    this.star.disableBody(true, true);
-    gameOptions.score += 10;
-    gameOptions.scoreText.setText("Score: " + gameOptions.score);
-
-    // if (stars.countActive(true) === 0) {
-    //   stars.children.iterate(function (child) {
-    //     child.enableBody(true, child.x, 0, true, true);
-    //   });
-
-    //   var x =
-    //     player.x < 400
-    //       ? Phaser.Math.Between(400, 800)
-    //       : Phaser.Math.Between(0, 400);
-
-    //   var bomb = bombs.create(x, 16, "bomb");
-    //   bomb.setBounce(1);
-    //   bomb.setCollideWorldBounds(true);
-    //   bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    //   bomb.allowGravity = false;
-    // }
-  }
-
-  addStars(platformWidth, posX) {
-    let platform;
-    if (this.platformPool.getLength()) {
-      platform = this.platformPool.getFirst();
-      platform.x = posX;
-      platform.active = true;
-      platform.visible = true;
-      this.platformPool.remove(platform);
-    } else {
-      platform = this.physics.add.sprite(posX, config.height * 0.8, "star");
-      platform.setImmovable(true);
-      platform.setVelocityX(gameOptions.platformStartSpeed * -1);
-      this.platformGroup.add(platform);
-    }
-    platform.displayWidth = platformWidth;
-    this.nextPlatformDistance = Phaser.Math.Between(
-      gameOptions.spawnRange[0],
-      gameOptions.spawnRange[1]
-    );
-  }
   addPlatform(platformWidth, posX) {
     let platform;
     if (this.platformPool.getLength()) {
@@ -208,50 +157,38 @@ export default class GameScene extends Phaser.Scene {
   }
 }
 
-function collectStar(player, star) {
-  star.disableBody(true, true);
-  score += 10;
-  scoreText.setText("Score: " + score);
+function collectStar() {
+  this.star.children.disableBody(true, true);
 
-  if (stars.countActive(true) === 0) {
-    stars.children.iterate(function (child) {
-      child.enableBody(true, child.x, 0, true, true);
-    });
+  const valueBefore = gameOptions.score;
+  gameOptions.score += 10;
+  const valueAfter = gameOptions.score;
+  gameOptions.scoreText = gameOptions.score;
+  getScoreBox.innerText = gameOptions.score;
 
+  if (valueBefore < valueAfter) {
     var x =
-      player.x < 400
+      this.player.x < 400
         ? Phaser.Math.Between(400, 800)
         : Phaser.Math.Between(0, 400);
 
-    var bomb = bombs.create(x, 16, "bomb");
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    bomb.allowGravity = false;
+    this.bomb = this.bombs.create(x, 16, "bomb");
+    this.bomb
+      .setBounce(1)
+      .setCollideWorldBounds(true)
+      .setVelocity(Phaser.Math.Between(-200, 200), 100);
+    this.bomb.allowGravity = false;
   }
 }
 
 function hitBomb(player, bomb) {
   this.physics.pause();
 
-  player.setTint(0xff0000);
-
-  player.anims.play("turn");
-
   gameOver = true;
   if (gameOver) {
+    gameOptions.scoreText = 0;
+    getScoreBox.innerText = 0;
+
     this.scene.start("game-over", "game-over");
   }
 }
-
-// function addPlatform(X, Y, plat, scale) {
-//   if (scale) {
-//     return plat.create(X, Y, "ground").setScale(scale).refreshBody();
-//   } else {
-//     return plat.create(X, Y, "ground");
-//   }
-// }
-
-// function randomNum() {
-//   return Math.floor(Math.random() * (600 - 100)) + 100; // You can remove the Math.floor if you don't want it to be an integer
-// }
