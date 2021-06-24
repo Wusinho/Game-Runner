@@ -95,6 +95,10 @@ export default class GameScene extends Phaser.Scene {
     // this.physics.add.collider(this.stars, platforms);
 
     this.physics.add.overlap(this.player, this.star, collectStar, null, this);
+    this.scoreText = this.add.text(10, 10, "score: 0", {
+      fontSize: "32px",
+      fill: "#000",
+    });
   }
 
   jump() {
