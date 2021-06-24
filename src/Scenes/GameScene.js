@@ -74,6 +74,7 @@ export default class GameScene extends Phaser.Scene {
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
+    console.log(this.star.children.entries.length);
 
     this.star.children.iterate(function (child) {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
@@ -158,7 +159,7 @@ export default class GameScene extends Phaser.Scene {
 }
 
 function collectStar() {
-  this.star.children.disableBody(true, true);
+  this.star.disableBody(true, true);
 
   const valueBefore = gameOptions.score;
   gameOptions.score += 10;
