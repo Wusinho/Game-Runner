@@ -8,7 +8,7 @@ export default (obj) => {
     const saveFilter =    obj.sort(function (a, b) {return b.score - a.score})
     
     saveFilter.forEach(function (value, i) {
-
+      console.log(value.user)
 
       const tableElement = document.getElementById('tbody')
 

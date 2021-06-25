@@ -1,4 +1,6 @@
 /* eslint-disable */
+import Score from "../Score"
+
 
 function editMethod(name, newDescription, property) {
   let existing = localStorage.getItem(name);
@@ -13,11 +15,17 @@ function setLocalObject(value) {
 }
 
 function getLocal() {
-  return JSON.parse(localStorage.getItem("save"));
+  return JSON.parse(localStorage.getItem("default"));
 }
 function getStringLocal(){
   return localStorage.getItem("default");
 }
 
+function setDefaultName(){
+  const defaultName = new Score();
 
-export { editMethod, setLocalObject,getLocal,getStringLocal };
+  setLocalObject(defaultName);
+
+}
+
+export { editMethod, setLocalObject,getLocal,getStringLocal,setDefaultName };

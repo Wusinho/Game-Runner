@@ -2,8 +2,9 @@ import Phaser from "phaser";
 import config from "../Config/config";
 import { editMethod,getStringLocal } from "../Modules/editMethod";
 import sendData from "../Modules/sendData"
+import dataDisplay from "../Modules/dataDisplay"
 
-const getScoreBox = document.getElementById("scoreBox");
+const getTable = document.getElementById('table');
 
 var gameOver = false;
 
@@ -57,14 +58,12 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.platformGroup = this.add.group({
-      // once a platform is removed, it's added to the pool
       removeCallback: function (platform) {
         platform.scene.platformPool.add(platform);
       },
     });
 
     this.platformPool = this.add.group({
-      // once a platform is removed from the pool, it's added to the active platforms group
       removeCallback: function (platform) {
         platform.scene.platformGroup.add(platform);
       },
@@ -95,7 +94,6 @@ export default class GameScene extends Phaser.Scene {
     this.player.setGravityY(gameOptions.playerGravity);
 
     this.physics.add.collider(this.player, this.platformGroup);
-    // this.physics.add.collider(this.stars, this.platformGroup);
 
     // this.input.on("pointerdown", this.jump, this);
 
@@ -113,6 +111,16 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.bombs, hitBomb, null, this);
     this.physics.add.collider(this.bombs, this.platformGroup);
     this.physics.add.collider(this.bombs, this.bombs);
+
+    this.scoreText = this.add.text(16, 16, `score: ${gameOptions.score}`, {
+      fontSize: '52px',
+      fill: '#f9f9f9',
+    });
+
+    this.scoreText.setDepth(4);
+
+
+
   }
 
   collectStar(player, star) {
@@ -123,8 +131,8 @@ export default class GameScene extends Phaser.Scene {
 
     const valueBefore = gameOptions.score;
     gameOptions.score += 10;
+    this.scoreText.setText(`score: ${gameOptions.score}`);
     const valueAfter = gameOptions.score;
-    getScoreBox.innerText = gameOptions.score;
 
     if (valueBefore < valueAfter) {
       var x =
@@ -142,20 +150,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   jump() {
-    // console.log(this.cursors);
-    // if (this.cursors.left.isDown) {
-    //   this.player.setVelocityX(-160);
-    //   this.player.anims.play("left", true);
-    // } else if (this.cursors.right.isDown) {
-    //   this.player.setVelocityX(160);
-    //   this.player.anims.play("right", true);
-    // } else {
-    //   this.player.setVelocityX(0);
-    //   this.player.anims.play("turn");
-    // }
-    // if (this.cursors.up.isDown) {
-    //   this.player.setVelocityY(-630);
-    // }
+  
     // const touchDowm = this.player.body.touching.down;
     // const { playerJumps } = this;
     // if (
@@ -192,13 +187,12 @@ export default class GameScene extends Phaser.Scene {
 
     //gameOver
     if (this.player.y > config.height) {
+
       editMethod("default", gameOptions.score, "score");
-
       sendData(getStringLocal())
-
+      dataDisplay(getTable)
 
       gameOptions.score = 0;
-      getScoreBox.innerText = 0;
       this.scene.start("game-over", "game-over");
     }
     this.player.x = gameOptions.playerStartPosition;
@@ -272,10 +266,10 @@ function hitBomb(player, bomb) {
   if (gameOver) {
     editMethod("default", gameOptions.score, "score");
     sendData(getStringLocal())
+    dataDisplay(getTable)
 
 
     gameOptions.score = 0;
-    getScoreBox.innerText = 0;
 
     this.scene.start("game-over", "game-over");
   }

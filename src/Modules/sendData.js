@@ -19,14 +19,6 @@ export default function(obj){
       .then((response) => console.log("Success:", response));
 
 
-      const getInfo = async () => {
-        const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
-    
-        return data;
-      };
-
-
-      return getInfo
 
 }
 

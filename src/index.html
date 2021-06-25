@@ -24,30 +24,28 @@
           <input
             class="form-control me-2"
             type="search"
-            placeholder="Add Name"
+            placeholder="Add Player"
             aria-label="Search"
             id="add-name"
           />
-          <button class="btn btn-success" type="submit">Submit</button>
+          <button class="btn btn-success" type="submit">Go</button>
         </form>
       </div>
     </nav>
     <div class="">
-      <div id="scoreBox">Hello</div>
+      <h1 id="playerGreeting">Hello</h1>
       <div id="canvas"></div>
-      <div id="table">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Player</th>
-            <th scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-      </table>
-    </div>
+        <table id="table" class="table d-none">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Player</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+        </table>
   </div>
   </body>
 </html>
