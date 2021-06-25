@@ -3,9 +3,9 @@ import { editMethod, setLocalObject, getLocal  } from "./editMethod";
 
 
 
-export default (name) => {
-    const saveObject = getLocal('save')
-    const saveFilter =    saveObject.sort(function (a, b) {return b.score - a.score})
+export default (obj) => {
+    if (!obj) return
+    const saveFilter =    obj.sort(function (a, b) {return b.score - a.score})
     
     saveFilter.forEach(function (value, i) {
 

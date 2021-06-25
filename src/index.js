@@ -34,7 +34,7 @@ class Game extends Phaser.Game {
   }
 }
 
-const game = new Game();
+new Game();
 
 const getForm = document.getElementById("form");
 
@@ -50,11 +50,9 @@ getForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
-// let dataBase
 
 getData().then((data) => {
-       localStorage.setItem('save', JSON.stringify(data.result));
-      displayScoreboard('lazo')
+      displayScoreboard(data.result)
 
       });
 
