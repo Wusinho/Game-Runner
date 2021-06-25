@@ -1,6 +1,7 @@
 import bootstrap from "bootstrap";
 import "./main.scss";
 
+import editMethod from "./Scenes/editMethod";
 import Phaser from "phaser";
 import Model from "./Model";
 import config from "./Config/config";
@@ -32,3 +33,18 @@ class Game extends Phaser.Game {
 }
 
 window.game = new Game();
+
+localStorage.setItem("default", JSON.stringify(new Score()));
+
+const getForm = document.getElementById("form");
+
+getForm.addEventListener("submit", (e) => {
+  const name = document.getElementById("add-name");
+  if (name) {
+    const nameValue = name.value;
+    editMethod("default", nameValue, "name");
+    name.value = "";
+  }
+
+  e.preventDefault();
+});
