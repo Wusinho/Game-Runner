@@ -24,11 +24,8 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     this.load.image("sky", "./assets/sky.png");
     this.load.image("platform", "./assets/platform.png");
-    this.load.image("floor", "./assets/platform2.png");
     this.load.image("star", "./assets/star.png");
     this.load.image("bomb", "./assets/bomb.png");
-    // this.load.image("player", "./assets/dude.png");
-    // this.load.image("dude", "./assets/dude.png");
     this.load.spritesheet("player", "./assets/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
@@ -99,9 +96,10 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.platformGroup);
     // this.physics.add.collider(this.stars, this.platformGroup);
 
-    this.input.on("pointerdown", this.jump, this);
+    // this.input.on("pointerdown", this.jump, this);
 
-    // this.cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
+    console.log(this.cursors);
 
     this.bombs = this.physics.add.group();
 
@@ -114,6 +112,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.physics.add.collider(this.player, this.bombs, hitBomb, null, this);
     this.physics.add.collider(this.bombs, this.platformGroup);
+    this.physics.add.collider(this.bombs, this.bombs);
   }
 
   collectStar(player, star) {
@@ -157,37 +156,36 @@ export default class GameScene extends Phaser.Scene {
     // if (this.cursors.up.isDown) {
     //   this.player.setVelocityY(-630);
     // }
-
-    const touchDowm = this.player.body.touching.down;
-    const { playerJumps } = this;
-    if (
-      !this.dying &&
-      (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
-    ) {
-      // this.jumpSound.play();
-      if (this.player.body.touching.down) {
-        this.playerJumps = 0;
-      }
-      this.player.setVelocityY(gameOptions.jumpForce * -1);
-      this.playerJumps += 1;
-      // this.player.anims.play("jump");
-    }
+    // const touchDowm = this.player.body.touching.down;
+    // const { playerJumps } = this;
+    // if (
+    //   !this.dying &&
+    //   (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
+    // ) {
+    //   // this.jumpSound.play();
+    //   if (this.player.body.touching.down) {
+    //     this.playerJumps = 0;
+    //   }
+    //   this.player.setVelocityY(gameOptions.jumpForce * -1);
+    //   this.playerJumps += 1;
+    //   // this.player.anims.play("jump");
+    // }
   }
 
   update() {
-    // if (this.cursors.left.isDown) {
-    //   this.player.setVelocityX(-160);
-    //   this.player.anims.play("left", true);
-    // } else if (this.cursors.right.isDown) {
-    //   this.player.setVelocityX(160);
-    //   this.player.anims.play("right", true);
-    // } else {
-    //   this.player.setVelocityX(0);
-    //   this.player.anims.play("turn");
-    // }
-    // if (this.cursors.up.isDown && this.player.body.touching.down) {
-    //   this.player.setVelocityY(-330);
-    // }
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-600);
+      this.player.anims.play("left", true);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(600);
+      this.player.anims.play("right", true);
+    } else {
+      this.player.setVelocityX(0);
+      this.player.anims.play("turn");
+    }
+    if (this.cursors.space.isDown) {
+      this.player.setVelocityY(-330);
+    }
 
     //gameOver
     if (this.player.y > config.height) {
@@ -252,7 +250,6 @@ export default class GameScene extends Phaser.Scene {
         star.setBounce(1);
         star.setCollideWorldBounds(true);
         star.setVelocity(Phaser.Math.Between(-200, 200), 100);
-        // this.physics.add.collider(this.star, this.platformGroup);
 
         this.starGroup.add(star);
       }
