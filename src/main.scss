@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&family=Pangolin&display=swap');
 
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
 body{
     height: 90vh;
-background-color: blue;
-display: flex;
-justify-content: center;
-align-items: center;
+    background-color: red;
+    
+    font: 100% $font-stack;
+    color: $primary-color;
+
 }

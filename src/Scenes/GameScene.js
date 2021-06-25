@@ -34,7 +34,6 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, "sky");
-
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
@@ -99,7 +98,6 @@ export default class GameScene extends Phaser.Scene {
     // this.input.on("pointerdown", this.jump, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
-    console.log(this.cursors);
 
     this.bombs = this.physics.add.group();
 
@@ -175,9 +173,12 @@ export default class GameScene extends Phaser.Scene {
   update() {
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-600);
+      this.player.x = this.player.x - 200;
       this.player.anims.play("left", true);
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(600);
+      this.player.x = this.player.x + 200;
+
       this.player.anims.play("right", true);
     } else {
       this.player.setVelocityX(0);

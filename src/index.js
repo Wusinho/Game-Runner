@@ -1,4 +1,4 @@
-// import "bootstrap/dist/css/bootstrap.min.css";
+import bootstrap from "bootstrap";
 import "./main.scss";
 
 import Phaser from "phaser";
@@ -11,6 +11,8 @@ import TitleScene from "./Scenes/TitleScene";
 import OptionsScene from "./Scenes/OptionsScene";
 import CreditsScene from "./Scenes/CreditScene";
 import gameOver from "./Scenes/gameOver";
+import Score from "./Score";
+import { get } from "jquery";
 
 class Game extends Phaser.Game {
   constructor() {
@@ -24,7 +26,8 @@ class Game extends Phaser.Game {
     this.scene.add("Game", GameScene);
     this.scene.start("Boot");
     const model = new Model();
-    this.globals = { model, bgMusic: null };
+    const score = new Score();
+    this.globals = { model, score, bgMusic: null };
   }
 }
 
