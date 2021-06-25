@@ -2,6 +2,7 @@ import bootstrap from "bootstrap";
 import "./main.scss";
 
 import { setLocalObject } from "./Scenes/editMethod";
+import getData from "./Scenes/getData"
 import Phaser from "phaser";
 import Model from "./Model";
 import config from "./Config/config";
@@ -53,3 +54,11 @@ getForm.addEventListener("submit", (e) => {
 
   e.preventDefault();
 });
+
+let dataBase
+
+getData().then((data) => {
+       localStorage.setItem('save', JSON.stringify(data.result));
+      });
+
+
