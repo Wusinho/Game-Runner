@@ -1,8 +1,9 @@
 import bootstrap from "bootstrap";
 import "./main.scss";
 
-import { setLocalObject } from "./Modules/editMethod";
-import getData from "./Scenes/getData"
+import { setLocalObject,getLocal } from "./Modules/editMethod";
+import displayScoreboard from "./Modules/displayScoreboard"
+import getData from "./Modules/getData"
 import Phaser from "phaser";
 import Model from "./Model";
 import config from "./Config/config";
@@ -35,12 +36,6 @@ class Game extends Phaser.Game {
 
 const game = new Game();
 
-const getCanvas = document.getElementsByTagName("canvas");
-console.log(getCanvas);
-getCanvas.className = "canvas";
-
-// localStorage.setItem("default", JSON.stringify(new Score()));
-
 const getForm = document.getElementById("form");
 
 getForm.addEventListener("submit", (e) => {
@@ -59,6 +54,8 @@ getForm.addEventListener("submit", (e) => {
 
 getData().then((data) => {
        localStorage.setItem('save', JSON.stringify(data.result));
-      });
+      //  const getsave = JSON.parse(localStorage.getItem('save'))
+      displayScoreboard('lazo')
 
+      });
 

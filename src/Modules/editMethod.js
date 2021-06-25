@@ -12,9 +12,12 @@ function setLocalObject(value) {
   localStorage.setItem("default", JSON.stringify(value));
 }
 
-function getLocal(value) {
-  localStorage.setItem("default", JSON.parse(value));
+function getLocal() {
+  return JSON.parse(localStorage.getItem("save"));
+}
+function getStringLocal(){
+  return localStorage.getItem("default");
 }
 
 
-export { editMethod, setLocalObject,getLocal };
+export { editMethod, setLocalObject,getLocal,getStringLocal };
