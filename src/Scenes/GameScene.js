@@ -195,6 +195,8 @@ export default class GameScene extends Phaser.Scene {
       editMethod("default", gameOptions.score, "score");
 
       sendData(getStringLocal())
+
+
       gameOptions.score = 0;
       getScoreBox.innerText = 0;
       this.scene.start("game-over", "game-over");

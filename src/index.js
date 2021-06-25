@@ -54,7 +54,6 @@ getForm.addEventListener("submit", (e) => {
 
 getData().then((data) => {
        localStorage.setItem('save', JSON.stringify(data.result));
-      //  const getsave = JSON.parse(localStorage.getItem('save'))
       displayScoreboard('lazo')
 
       });
