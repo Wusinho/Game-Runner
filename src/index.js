@@ -55,7 +55,7 @@ getForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
-let dataBase
+// let dataBase
 
 getData().then((data) => {
        localStorage.setItem('save', JSON.stringify(data.result));
