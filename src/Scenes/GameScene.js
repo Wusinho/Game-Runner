@@ -14,7 +14,7 @@ let gameOptions = {
   playerStartPosition: 200,
   jumps: 200,
   score: 0,
-  scoreText: "",
+  coinPercent: 90,
 };
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -38,6 +38,26 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, "sky");
 
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "turn",
+      frames: [{ key: "player", frame: 4 }],
+      frameRate: 20,
+    });
+
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     this.platformGroup = this.add.group({
       // once a platform is removed, it's added to the pool
       removeCallback: function (platform) {
@@ -52,8 +72,19 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
+    this.starGroup = this.add.group({
+      removeCallback: (star) => {
+        star.scene.starPool.add(star);
+      },
+    });
+
+    this.starPool = this.add.group({
+      removeCallback: (star) => {
+        star.scene.starGroup.add(star);
+      },
+    });
+
     this.playerJumps = 200;
-    this.scoreText = "";
 
     this.addPlatform(config.width, config.width / 2);
 
@@ -62,60 +93,105 @@ export default class GameScene extends Phaser.Scene {
       config.height / 2,
       "player"
     );
+
     this.player.setGravityY(gameOptions.playerGravity);
 
-    // setting collisions between the player and the platform group
     this.physics.add.collider(this.player, this.platformGroup);
+    // this.physics.add.collider(this.stars, this.platformGroup);
 
     this.input.on("pointerdown", this.jump, this);
 
-    // this.star = this.physics.add.group({
-    //   key: "star",
-    //   repeat: 11,
-    //   setXY: { x: 12, y: 0, stepX: 70 },
-    // });
-    // console.log(this.star.children.entries.length);
-
-    // this.star.children.iterate(function (child) {
-    //   child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    //   child.setGravity(-5, 100);
-    //   child.setBounce(1);
-    //   child.setCollideWorldBounds(true);
-    //   child.setVelocity(Phaser.Math.Between(-200, 200), 100);
-    // });
-
-    this.star = this.physics.add.sprite(100, 450, "star");
-    this.star
-      .setGravity(-5, 100)
-      .setBounce(1)
-      .setCollideWorldBounds(true)
-      .setVelocity(Phaser.Math.Between(-200, 200), 100);
+    // this.cursors = this.input.keyboard.createCursorKeys();
 
     this.bombs = this.physics.add.group();
 
-    this.physics.add.collider(this.star, this.platformGroup);
-
-    this.physics.add.overlap(this.player, this.star, collectStar, null, this);
+    this.physics.add.overlap(
+      this.player,
+      this.starGroup,
+      this.collectStar,
+      null,
+      this
+    );
     this.physics.add.collider(this.player, this.bombs, hitBomb, null, this);
+    this.physics.add.collider(this.bombs, this.platformGroup);
+  }
+
+  collectStar(player, star) {
+    star.disableBody(true, true);
+
+    this.starGroup.killAndHide(star);
+    this.starGroup.remove(star);
+
+    const valueBefore = gameOptions.score;
+    gameOptions.score += 10;
+    const valueAfter = gameOptions.score;
+    getScoreBox.innerText = gameOptions.score;
+
+    if (valueBefore < valueAfter) {
+      var x =
+        this.player.x < 400
+          ? Phaser.Math.Between(400, 800)
+          : Phaser.Math.Between(0, 400);
+
+      this.bomb = this.bombs.create(x, 16, "bomb");
+      this.bomb
+        .setBounce(1)
+        .setCollideWorldBounds(true)
+        .setVelocity(Phaser.Math.Between(-200, 200), 100);
+      this.bomb.allowGravity = false;
+    }
   }
 
   jump() {
+    // console.log(this.cursors);
+    // if (this.cursors.left.isDown) {
+    //   this.player.setVelocityX(-160);
+    //   this.player.anims.play("left", true);
+    // } else if (this.cursors.right.isDown) {
+    //   this.player.setVelocityX(160);
+    //   this.player.anims.play("right", true);
+    // } else {
+    //   this.player.setVelocityX(0);
+    //   this.player.anims.play("turn");
+    // }
+    // if (this.cursors.up.isDown) {
+    //   this.player.setVelocityY(-630);
+    // }
+
+    const touchDowm = this.player.body.touching.down;
+    const { playerJumps } = this;
     if (
-      this.player.body.touching.down ||
-      (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)
+      !this.dying &&
+      (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
     ) {
+      // this.jumpSound.play();
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
       }
       this.player.setVelocityY(gameOptions.jumpForce * -1);
-      this.playerJumps++;
+      this.playerJumps += 1;
+      // this.player.anims.play("jump");
     }
   }
 
   update() {
+    // if (this.cursors.left.isDown) {
+    //   this.player.setVelocityX(-160);
+    //   this.player.anims.play("left", true);
+    // } else if (this.cursors.right.isDown) {
+    //   this.player.setVelocityX(160);
+    //   this.player.anims.play("right", true);
+    // } else {
+    //   this.player.setVelocityX(0);
+    //   this.player.anims.play("turn");
+    // }
+    // if (this.cursors.up.isDown && this.player.body.touching.down) {
+    //   this.player.setVelocityY(-330);
+    // }
+
     //gameOver
     if (this.player.y > config.height) {
-      gameOptions.scoreText = 0;
+      gameOptions.score = 0;
       getScoreBox.innerText = 0;
       this.scene.start("game-over", "game-over");
     }
@@ -162,30 +238,25 @@ export default class GameScene extends Phaser.Scene {
       gameOptions.spawnRange[0],
       gameOptions.spawnRange[1]
     );
-  }
-}
+    if (Phaser.Math.Between(1, 50) <= gameOptions.coinPercent) {
+      if (this.starPool.getLength()) {
+        const star = this.starPool.getFirst();
+        // star.x = posX;
+        // star.alpha = 1;
+        // star.active = true;
+        // star.visible = true;
+        this.starPool.remove(star);
+      } else {
+        const star = this.physics.add.sprite(posX, 96, "star");
+        star.setGravity(-5, 100);
+        star.setBounce(1);
+        star.setCollideWorldBounds(true);
+        star.setVelocity(Phaser.Math.Between(-200, 200), 100);
+        // this.physics.add.collider(this.star, this.platformGroup);
 
-function collectStar(_player, _star) {
-  this.star.disableBody(true, true);
-
-  const valueBefore = gameOptions.score;
-  gameOptions.score += 10;
-  const valueAfter = gameOptions.score;
-  gameOptions.scoreText = gameOptions.score;
-  getScoreBox.innerText = gameOptions.score;
-
-  if (valueBefore < valueAfter) {
-    var x =
-      this.player.x < 400
-        ? Phaser.Math.Between(400, 800)
-        : Phaser.Math.Between(0, 400);
-
-    this.bomb = this.bombs.create(x, 16, "bomb");
-    this.bomb
-      .setBounce(1)
-      .setCollideWorldBounds(true)
-      .setVelocity(Phaser.Math.Between(-200, 200), 100);
-    this.bomb.allowGravity = false;
+        this.starGroup.add(star);
+      }
+    }
   }
 }
 
@@ -194,7 +265,7 @@ function hitBomb(player, bomb) {
 
   gameOver = true;
   if (gameOver) {
-    gameOptions.scoreText = 0;
+    gameOptions.score = 0;
     getScoreBox.innerText = 0;
 
     this.scene.start("game-over", "game-over");
