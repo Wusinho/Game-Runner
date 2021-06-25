@@ -193,7 +193,6 @@ export default class GameScene extends Phaser.Scene {
     //gameOver
     if (this.player.y > config.height) {
       editMethod("default", gameOptions.score, "score");
-    console.log(getStringLocal())
 
       sendData(getStringLocal())
       gameOptions.score = 0;
@@ -270,7 +269,6 @@ function hitBomb(player, bomb) {
   gameOver = true;
   if (gameOver) {
     editMethod("default", gameOptions.score, "score");
-    console.log(getStringLocal())
     sendData(getStringLocal())
 
 
