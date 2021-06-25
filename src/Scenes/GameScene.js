@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import config from "../Config/config";
+import { editMethod, setLocal } from "./editMethod";
 
 const getScoreBox = document.getElementById("scoreBox");
 
@@ -190,6 +191,8 @@ export default class GameScene extends Phaser.Scene {
 
     //gameOver
     if (this.player.y > config.height) {
+      editMethod("default", gameOptions.score, "score");
+
       gameOptions.score = 0;
       getScoreBox.innerText = 0;
       this.scene.start("game-over", "game-over");
@@ -263,6 +266,8 @@ function hitBomb(player, bomb) {
 
   gameOver = true;
   if (gameOver) {
+    editMethod("default", gameOptions.score, "score");
+
     gameOptions.score = 0;
     getScoreBox.innerText = 0;
 
