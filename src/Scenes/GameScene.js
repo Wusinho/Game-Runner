@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import config from "../Config/config";
-import { editMethod, setLocal } from "./editMethod";
+import { editMethod } from "../Modules/editMethod";
 
 const getScoreBox = document.getElementById("scoreBox");
 

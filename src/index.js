@@ -1,7 +1,7 @@
 import bootstrap from "bootstrap";
 import "./main.scss";
 
-import { setLocalObject } from "./Scenes/editMethod";
+import { setLocalObject } from "./Modules/editMethod";
 import getData from "./Scenes/getData"
 import Phaser from "phaser";
 import Model from "./Model";
