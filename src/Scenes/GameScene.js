@@ -275,7 +275,11 @@ function hitBomb(player, bomb) {
 }
 
 function sendAndGet(){
-  leaderboard.addScore(getStringLocal())
-  displayScoreboard()
-    
+  const sendData = leaderboard.addScore(getStringLocal())
+  const getdata =  async () => {
+    if (sendData){
+      leaderboard.getInfo().then(data => console.log(data))
+    } 
+  }
+    getdata();
 }

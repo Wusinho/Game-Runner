@@ -14,14 +14,15 @@ const leaderboard = (() => {
       body : obj,
     }); 
 
-    if (response) getInfo()
+    return response.json();
   };
 
 
   const getInfo = async () => {
     const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
-    localStorage.setItem('Api', JSON.stringify(data.result));
+    // localStorage.setItem('Api', JSON.stringify(data.result));
+    return data;
   };
 
   return {
@@ -31,4 +32,7 @@ const leaderboard = (() => {
 })();
 
 
-export default leaderboard;
+
+
+
+  export default leaderboard
