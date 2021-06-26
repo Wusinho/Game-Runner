@@ -21,6 +21,10 @@ function getStringLocal(){
   return localStorage.getItem("default");
 }
 
+function getApi(){
+  return localStorage.getItem("Api")
+}
+
 function setDefaultName(){
   const defaultName = new Score();
 
@@ -28,4 +32,4 @@ function setDefaultName(){
 
 }
 
-export { editMethod, setLocalObject,getLocal,getStringLocal,setDefaultName };
+export { editMethod, setLocalObject,getLocal,getStringLocal,setDefaultName,getApi };

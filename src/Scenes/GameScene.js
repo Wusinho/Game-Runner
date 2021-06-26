@@ -1,8 +1,9 @@
 import Phaser from "phaser";
 import config from "../Config/config";
-import { editMethod,getStringLocal } from "../Modules/editMethod";
-import sendData from "../Modules/sendData"
-import dataDisplay from "../Modules/dataDisplay"
+import { editMethod,getStringLocal,getApi } from "../Modules/editMethod";
+import leaderboard from "../Modules/apiScore"
+import displayScoreboard from "../Modules/displayScoreboard"
+
 
 const getTable = document.getElementById('table');
 
@@ -189,9 +190,9 @@ export default class GameScene extends Phaser.Scene {
     if (this.player.y > config.height) {
 
       editMethod("default", gameOptions.score, "score");
-      sendData(getStringLocal())
-      dataDisplay(getTable)
 
+      sendAndGet()
+      
       gameOptions.score = 0;
       this.scene.start("game-over", "game-over");
     }
@@ -265,12 +266,16 @@ function hitBomb(player, bomb) {
   gameOver = true;
   if (gameOver) {
     editMethod("default", gameOptions.score, "score");
-    sendData(getStringLocal())
-    dataDisplay(getTable)
-
-
+  
+    sendAndGet()
     gameOptions.score = 0;
 
     this.scene.start("game-over", "game-over");
   }
+}
+
+function sendAndGet(){
+  leaderboard.addScore(getStringLocal())
+  displayScoreboard()
+    
 }

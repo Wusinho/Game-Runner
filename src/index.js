@@ -2,7 +2,6 @@ import "./main.scss";
 
 import { setLocalObject,getLocal,setDefaultName } from "./Modules/editMethod";
 import displayScoreboard from "./Modules/displayScoreboard"
-import getData from "./Modules/getData"
 import Phaser from "phaser";
 import Model from "./Model";
 import config from "./Config/config";
