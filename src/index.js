@@ -55,5 +55,7 @@ getForm.addEventListener("submit", (e) => {
 
 
 
-
-
+for (let i = 0; i < localStorage.length; i++) {
+  const key = localStorage.key(i)
+  if(key == 'default') localStorage.getItem("default");
+}
