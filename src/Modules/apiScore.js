@@ -14,7 +14,7 @@ const leaderboard = (() => {
       body : obj,
     }); 
 
-    return response.json();
+    if (response) getInfo()
   };
 
 
@@ -22,7 +22,7 @@ const leaderboard = (() => {
     const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
     // localStorage.setItem('Api', JSON.stringify(data.result));
-    return data;
+    displayDataIn(data.result);
   };
 
   return {
