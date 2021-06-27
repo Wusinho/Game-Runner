@@ -14,7 +14,11 @@ const leaderboard = (() => {
       body : obj,
     }); 
 
-    if (response) getInfo()
+    if (response) {
+
+      getInfo()
+      return response
+    }
   };
 
 
