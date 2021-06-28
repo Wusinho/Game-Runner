@@ -1,9 +1,7 @@
+import displayScoreboard from './displayScoreboard';
 
-import displayScoreboard from "./displayScoreboard"
-
-const key = 'eZdZerySXHfh0blWsUNx'
+const key = 'eZdZerySXHfh0blWsUNx';
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
-
 
 const leaderboard = (() => {
   const addScore = async (obj) => {
@@ -13,22 +11,17 @@ const leaderboard = (() => {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body : obj,
-    }); 
+      body: obj,
+    });
 
-    
-     return response
-    
-
+    return response;
   };
-
 
   const getInfo = async () => {
     const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
     // localStorage.setItem('Api', JSON.stringify(data.result))
-    displayScoreboard(data.result)
-  
+    displayScoreboard(data.result);
   };
 
   return {
@@ -37,8 +30,4 @@ const leaderboard = (() => {
   };
 })();
 
-
-
-
-
-  export default leaderboard
+export default leaderboard;

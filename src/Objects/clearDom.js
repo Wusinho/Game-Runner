@@ -1,5 +1,4 @@
-export default function(){
-
-    const myNode = document.getElementById("tbody");
-    myNode.innerHTML = '';
-  }
+export default () => {
+  const myNode = document.getElementById('tbody');
+  myNode.innerHTML = '';
+};

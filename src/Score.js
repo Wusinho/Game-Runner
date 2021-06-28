@@ -1,4 +1,4 @@
-import createName from "./Modules/createName"
+import createName from './Modules/createName';
 
 export default class Score {
   constructor(user, score) {

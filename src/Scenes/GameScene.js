@@ -1,15 +1,14 @@
-import Phaser from "phaser";
-import config from "../Config/config";
-import { editMethod,getStringLocal,getApi } from "../Modules/editMethod";
-import leaderboard from "../Modules/apiScore"
-import clearDom from "../Objects/clearDom"
-
+import Phaser from 'phaser';
+import config from '../Config/config';
+import { editMethod, getStringLocal, getApi } from '../Modules/editMethod';
+import leaderboard from '../Modules/apiScore';
+import clearDom from '../Objects/clearDom';
 
 const getTable = document.getElementById('table');
 
-var gameOver = false;
+let gameOver = false;
 
-let gameOptions = {
+const gameOptions = {
   platformStartSpeed: 350,
   spawnRange: [100, 200],
   platformSizeRange: [100, 250],
@@ -22,7 +21,7 @@ let gameOptions = {
 };
 export default class GameScene extends Phaser.Scene {
   constructor() {
-    super("Game");
+    super('Game');
   }
 
   preload() {
@@ -31,56 +30,55 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('rock3', '../../assets/layers/rocks_3.png');
     this.load.image('sky', '../../assets/layers/sky.png');
     this.load.image('clouds1', '../../assets/layers/clouds_1.png');
-    this.load.image("platform", "./assets/platform.png");
-    this.load.image("star", "../../assets/layers/star.png");
-    this.load.image("bomb", "./assets/Skull-s.png");
-    this.load.spritesheet("player", "./assets/dude.png", {
+    this.load.image('platform', './assets/platform.png');
+    this.load.image('star', '../../assets/layers/star.png');
+    this.load.image('bomb', './assets/Skull-s.png');
+    this.load.spritesheet('player', './assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
     });
   }
 
   create() {
-    const tableParent = document.getElementById('table')
-    tableParent.className = 'table d-none'
-    clearDom()
+    const tableParent = document.getElementById('table');
+    tableParent.className = 'table d-none';
+    clearDom();
 
-    this.air = this.add.tileSprite(10, 60, 0, 0, 'sky')
-    this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0,0)
-  
-    this.rock2 = this.add.tileSprite(10, 60, 0, 0, 'rock2')
-  
-    this.rock1 = this.add.tileSprite(10, 60, 0, 0, 'rock1')
+    this.air = this.add.tileSprite(10, 60, 0, 0, 'sky');
+    this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0, 0);
 
+    this.rock2 = this.add.tileSprite(10, 60, 0, 0, 'rock2');
+
+    this.rock1 = this.add.tileSprite(10, 60, 0, 0, 'rock1');
 
     this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
       frameRate: 10,
       repeat: -1,
     });
 
     this.anims.create({
-      key: "turn",
-      frames: [{ key: "player", frame: 4 }],
+      key: 'turn',
+      frames: [{ key: 'player', frame: 4 }],
       frameRate: 20,
     });
 
     this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("player", { start: 5, end: 8 }),
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
       frameRate: 10,
       repeat: -1,
     });
 
     this.platformGroup = this.add.group({
-      removeCallback: function (platform) {
+      removeCallback(platform) {
         platform.scene.platformPool.add(platform);
       },
     });
 
     this.platformPool = this.add.group({
-      removeCallback: function (platform) {
+      removeCallback(platform) {
         platform.scene.platformGroup.add(platform);
       },
     });
@@ -104,14 +102,14 @@ export default class GameScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(
       gameOptions.playerStartPosition,
       config.height / 2,
-      "player"
+      'player',
     );
 
     this.player.setGravityY(gameOptions.playerGravity);
 
     this.physics.add.collider(this.player, this.platformGroup);
 
-    this.input.on("pointerdown", this.jump, this);
+    this.input.on('pointerdown', this.jump, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -122,7 +120,7 @@ export default class GameScene extends Phaser.Scene {
       this.starGroup,
       this.collectStar,
       null,
-      this
+      this,
     );
     this.physics.add.collider(this.player, this.bombs, hitBomb, null, this);
     this.physics.add.collider(this.bombs, this.platformGroup);
@@ -134,9 +132,6 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.scoreText.setDepth(4);
-
-
-
   }
 
   collectStar(player, star) {
@@ -151,12 +146,11 @@ export default class GameScene extends Phaser.Scene {
     const valueAfter = gameOptions.score;
 
     if (valueBefore < valueAfter) {
-      var x =
-        this.player.x < 400
-          ? Phaser.Math.Between(400, 800)
-          : Phaser.Math.Between(0, 400);
+      const x = this.player.x < 400
+        ? Phaser.Math.Between(400, 800)
+        : Phaser.Math.Between(0, 400);
 
-      this.bomb = this.bombs.create(x, 16, "bomb");
+      this.bomb = this.bombs.create(x, 16, 'bomb');
       this.bomb
         .setBounce(1)
         .setCollideWorldBounds(true)
@@ -166,12 +160,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   jump() {
-  
     const touchDowm = this.player.body.touching.down;
     const { playerJumps } = this;
     if (
-      !this.dying &&
-      (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
+      !this.dying
+      && (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
     ) {
       // this.jumpSound.play();
       if (this.player.body.touching.down) {
@@ -184,41 +177,38 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.rock2.tilePositionX += 0.1
-    this.rock1.tilePositionX += 1
-    this.clouds1.tilePositionX += 0.1
+    this.rock2.tilePositionX += 0.1;
+    this.rock1.tilePositionX += 1;
+    this.clouds1.tilePositionX += 0.1;
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-600);
       this.player.x = this.player.x - 200;
-      this.player.anims.play("left", true);
+      this.player.anims.play('left', true);
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(600);
       this.player.x = this.player.x + 200;
 
-      this.player.anims.play("right", true);
+      this.player.anims.play('right', true);
     } else {
       this.player.setVelocityX(0);
-      this.player.anims.play("right", true);
+      this.player.anims.play('right', true);
     }
-   
 
-    //gameOver
+    // gameOver
     if (this.player.y > config.height) {
+      editMethod('default', gameOptions.score, 'score');
 
-      editMethod("default", gameOptions.score, "score");
+      sendAndGet();
 
-      sendAndGet()
-      
       gameOptions.score = 0;
-      this.scene.start("game-over", "game-over");
+      this.scene.start('game-over', 'game-over');
     }
     this.player.x = gameOptions.playerStartPosition;
 
     // recycling platforms
     let minDistance = config.width;
     this.platformGroup.getChildren().forEach(function (platform) {
-      let platformDistance =
-        config.width - platform.x - platform.displayWidth / 2;
+      const platformDistance = config.width - platform.x - platform.displayWidth / 2;
       minDistance = Math.min(minDistance, platformDistance);
       if (platform.x < -platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
@@ -228,9 +218,9 @@ export default class GameScene extends Phaser.Scene {
 
     // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
-      var nextPlatformWidth = Phaser.Math.Between(
+      const nextPlatformWidth = Phaser.Math.Between(
         gameOptions.platformSizeRange[0],
-        gameOptions.platformSizeRange[1]
+        gameOptions.platformSizeRange[1],
       );
       this.addPlatform(nextPlatformWidth, config.width + nextPlatformWidth / 2);
     }
@@ -245,7 +235,7 @@ export default class GameScene extends Phaser.Scene {
       platform.visible = true;
       this.platformPool.remove(platform);
     } else {
-      platform = this.physics.add.sprite(posX, config.height * 0.8, "platform");
+      platform = this.physics.add.sprite(posX, config.height * 0.8, 'platform');
       platform.setImmovable(true);
       platform.setVelocityX(gameOptions.platformStartSpeed * -1);
       this.platformGroup.add(platform);
@@ -253,7 +243,7 @@ export default class GameScene extends Phaser.Scene {
     platform.displayWidth = platformWidth;
     this.nextPlatformDistance = Phaser.Math.Between(
       gameOptions.spawnRange[0],
-      gameOptions.spawnRange[1]
+      gameOptions.spawnRange[1],
     );
     if (Phaser.Math.Between(1, 50) <= gameOptions.coinPercent) {
       if (this.starPool.getLength()) {
@@ -264,7 +254,7 @@ export default class GameScene extends Phaser.Scene {
         // star.visible = true;
         this.starPool.remove(star);
       } else {
-        const star = this.physics.add.sprite(posX, 96, "star");
+        const star = this.physics.add.sprite(posX, 96, 'star');
         star.setGravity(-5, 100);
         star.setBounce(1);
         star.setCollideWorldBounds(true);
@@ -281,17 +271,16 @@ function hitBomb(player, bomb) {
 
   gameOver = true;
   if (gameOver) {
-    editMethod("default", gameOptions.score, "score");
-  
-    sendAndGet()
+    editMethod('default', gameOptions.score, 'score');
+
+    sendAndGet();
     gameOptions.score = 0;
 
-    this.scene.start("game-over", "game-over");
+    this.scene.start('game-over', 'game-over');
   }
 }
 
-function sendAndGet(){
-  const promise = Promise.resolve(leaderboard.addScore(getStringLocal()))
-  promise.then((value) => leaderboard.getInfo())
-  
+function sendAndGet() {
+  const promise = Promise.resolve(leaderboard.addScore(getStringLocal()));
+  promise.then((value) => leaderboard.getInfo());
 }
