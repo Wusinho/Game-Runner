@@ -3,15 +3,6 @@ import config from '../Config/config';
 import { editMethod, getStringLocal } from '../Modules/editMethod';
 import leaderboard from '../Modules/apiScore';
 import clearDom from '../Objects/clearDom';
-import rock_1 from "../../assets/layers/rocks_1.png"
-import rock_2 from "../../assets/layers/rocks_2.png"
-import sky from "../../assets/layers/sky.png"
-import clouds_1 from "../../assets/layers/clouds_1.png"
-import platf from "../../assets/platform.png"
-import starX from "../../assets/layers/star.png"
-import bombX from "../../assets/Skull-s.png"
-import playerX from "../../assets/dude.png"
-
 
 let gameOver = false;
 
@@ -52,14 +43,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('rock1', "../../assets/layers/rocks_1.png");
-    this.load.image('rock2', "../../assets/layers/rocks_2.png");
-    this.load.image('sky', "../../assets/layers/sky.png");
-    this.load.image('clouds1', "../../assets/layers/clouds_1.png");
-    this.load.image('platform', "../../assets/platform.png");
-    this.load.image('star', "../../assets/layers/star.png");
-    this.load.image('bomb', "../../assets/Skull-s.png");
-    this.load.spritesheet('player', "../../assets/dude.png", {
+    this.load.image('rock1', '../../assets/layers/rocks_1.png');
+    this.load.image('rock2', '../../assets/layers/rocks_2.png');
+    this.load.image('sky', '../../assets/layers/sky.png');
+    this.load.image('clouds1', '../../assets/layers/clouds_1.png');
+    this.load.image('platform', '../../assets/platform.png');
+    this.load.image('star', '../../assets/layers/star.png');
+    this.load.image('bomb', '../../assets/Skull-s.png');
+    this.load.spritesheet('player', '../../assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
     });
