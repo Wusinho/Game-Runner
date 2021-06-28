@@ -11,12 +11,12 @@ var gameOver = false;
 
 let gameOptions = {
   platformStartSpeed: 350,
-  spawnRange: [100, 350],
-  platformSizeRange: [50, 250],
+  spawnRange: [100, 200],
+  platformSizeRange: [100, 250],
   playerGravity: 900,
   jumpForce: 400,
   playerStartPosition: 200,
-  jumps: 200,
+  jumps: 2,
   score: 0,
   coinPercent: 90,
 };
@@ -34,8 +34,9 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('clouds1', '../../assets/layers/clouds_1.png');
     this.load.image("background", "../../assets/game_background_2.png");
     this.load.image("platform", "./assets/platform.png");
-    this.load.image("star", "./assets/star.png");
-    this.load.image("bomb", "./assets/bomb.png");
+    // this.load.image("star", "./assets/star.png");
+    this.load.image("star", "../../assets/layers/star.png");
+    this.load.image("bomb", "./assets/Skull-s.png");
     this.load.spritesheet("player", "./assets/dude.png", {
       frameWidth: 32,
       frameHeight: 48,
@@ -97,7 +98,7 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
-    this.playerJumps = 200;
+    this.playerJumps = 2;
 
     this.addPlatform(config.width, config.width / 2);
 
@@ -111,7 +112,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.platformGroup);
 
-    // this.input.on("pointerdown", this.jump, this);
+    this.input.on("pointerdown", this.jump, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -146,7 +147,7 @@ export default class GameScene extends Phaser.Scene {
     this.starGroup.remove(star);
 
     const valueBefore = gameOptions.score;
-    gameOptions.score += 10;
+    gameOptions.score += 100;
     this.scoreText.setText(`score: ${gameOptions.score}`);
     const valueAfter = gameOptions.score;
 
@@ -167,26 +168,26 @@ export default class GameScene extends Phaser.Scene {
 
   jump() {
   
-    // const touchDowm = this.player.body.touching.down;
-    // const { playerJumps } = this;
-    // if (
-    //   !this.dying &&
-    //   (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
-    // ) {
-    //   // this.jumpSound.play();
-    //   if (this.player.body.touching.down) {
-    //     this.playerJumps = 0;
-    //   }
-    //   this.player.setVelocityY(gameOptions.jumpForce * -1);
-    //   this.playerJumps += 1;
-    //   // this.player.anims.play("jump");
-    // }
+    const touchDowm = this.player.body.touching.down;
+    const { playerJumps } = this;
+    if (
+      !this.dying &&
+      (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
+    ) {
+      // this.jumpSound.play();
+      if (this.player.body.touching.down) {
+        this.playerJumps = 0;
+      }
+      this.player.setVelocityY(gameOptions.jumpForce * -1);
+      this.playerJumps += 1;
+      // this.player.anims.play("jump");
+    }
   }
 
   update() {
-    this.rock2.tilePositionX += 1
-    this.rock1.tilePositionX += 5
-    this.clouds1.tilePositionX += .1
+    this.rock2.tilePositionX += 0.1
+    this.rock1.tilePositionX += 1
+    this.clouds1.tilePositionX += 0.1
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-600);
       this.player.x = this.player.x - 200;
@@ -198,11 +199,9 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.play("right", true);
     } else {
       this.player.setVelocityX(0);
-      this.player.anims.play("turn");
+      this.player.anims.play("right", true);
     }
-    if (this.cursors.space.isDown) {
-      this.player.setVelocityY(-330);
-    }
+   
 
     //gameOver
     if (this.player.y > config.height) {
