@@ -2,11 +2,11 @@
 
 ## About
 
-This is a platform runner game developed using Phaser 3 library. The main character that has to jump from platform in a valley, using parallax scrolling background. 
+This is a platform runner game developed using Phaser 3 library. The main character has to jump from the platform in a valley, using a parallax scrolling background. 
 
-The score is increased, for each star and a new bomb spawn everytime a star is collected.
+The score is increased, for each star and a new bomb spawns every time a star is collected.
 
-You can get a guess name or you can provide one, and once the player dies, your score will be submitted to leaderboard API, only the 10 top scores will appear.
+You can get a guest name or you can provide one, and once the player dies, your score will be submitted to leaderboard API, only the 10 top scores will appear.
 
 
 ![screenshot](./assets/ScreenShot.png)
