@@ -42,24 +42,10 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  preload() {
-    this.load.image('rock1', '../../assets/layers/rocks_1.png');
-    this.load.image('rock2', '../../assets/layers/rocks_2.png');
-    this.load.image('sky', '../../assets/layers/sky.png');
-    this.load.image('clouds1', '../../assets/layers/clouds_1.png');
-    this.load.image('platform', '../../assets/platform.png');
-    this.load.image('star', '../../assets/layers/star.png');
-    this.load.image('bomb', '../../assets/Skull-s.png');
-    this.load.spritesheet('player', '../../assets/dude.png', {
-      frameWidth: 32,
-      frameHeight: 48,
-    });
-  }
-
   create() {
+    clearDom();
     const tableParent = document.getElementById('table');
     tableParent.className = 'table d-none';
-    clearDom();
 
     this.air = this.add.tileSprite(10, 60, 0, 0, 'sky');
     this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0, 0);
