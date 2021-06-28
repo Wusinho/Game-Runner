@@ -1,25 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&family=Pangolin&display=swap');
 
-
-$font-stack: Helvetica,
-sans-serif;
+$font-stack: helvetica,
+  sans-serif;
 $primary-color: #333;
 
 body {
-    // height: 90vh;
-    background-color: black;
-    height: 100%;
-    font: 100% $font-stack;
-    color: $primary-color;
-
+  // height: 90vh;
+  background-color: black;
+  height: 100%;
+  font: 100% $font-stack;
+  color: $primary-color;
 }
 
 #game {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #table {
-    margin-top: 20px;
-    max-width: 800px;
+  margin-top: 20px;
+  max-width: 800px;
 }
