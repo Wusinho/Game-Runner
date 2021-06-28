@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Wusinho/Game-Runner#readme",
   "dependencies": {
+    "audio-loader": "^1.0.3",
     "jquery": "^3.6.0",
     "node-fetch": "^2.6.1",
     "phaser": "^3.55.2",

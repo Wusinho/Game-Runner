@@ -95,7 +95,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('box', boxEmpty);
     this.load.image('checkedBox', checkBox);
-    this.load.audio('bgMusic', [gameMusic]);
+    this.load.audio('bgMusic', gameMusic);
   }
 
   create() {
