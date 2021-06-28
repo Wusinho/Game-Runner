@@ -13,7 +13,7 @@ You can get a guess name or you can provide one, and once the player dies, your 
 
 ## Live View
 
-<!-- [Live View](https://lazo-todolist.netlify.app/) -->
+[Live View](https://60da4ea939b16a0007df9f39--cranky-rosalind-3f540f.netlify.app/)
 
 ## Built with
 
