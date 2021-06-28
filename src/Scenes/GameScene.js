@@ -26,7 +26,13 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("sky", "./assets/sky.png");
+    // this.load.image("sky", "./assets/sky.png");
+    this.load.image('rock1', '../../assets/layers/rocks_1.png');
+    this.load.image('rock2', '../../assets/layers/rocks_2.png');
+    this.load.image('rock3', '../../assets/layers/rocks_3.png');
+    this.load.image('sky', '../../assets/layers/sky.png');
+    this.load.image('clouds1', '../../assets/layers/clouds_1.png');
+    this.load.image("background", "../../assets/game_background_2.png");
     this.load.image("platform", "./assets/platform.png");
     this.load.image("star", "./assets/star.png");
     this.load.image("bomb", "./assets/bomb.png");
@@ -37,7 +43,16 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 300, "sky");
+    // this.add.image(400, 300, "background");
+
+    this.air = this.add.tileSprite(10, 60, 0, 0, 'sky')
+    this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0,0)
+  
+    this.rock2 = this.add.tileSprite(10, 60, 0, 0, 'rock2')
+  
+    this.rock1 = this.add.tileSprite(10, 60, 0, 0, 'rock1')
+
+
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 3 }),
@@ -169,6 +184,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    this.rock2.tilePositionX += 1
+    this.rock1.tilePositionX += 5
+    this.clouds1.tilePositionX += .1
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-600);
       this.player.x = this.player.x - 200;
