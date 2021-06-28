@@ -1,5 +1,11 @@
 /* eslint-disable */
 import Phaser from 'phaser';
+import blueButton01 from '../../assets/ui/blue_button02.png'
+import blueButton02 from '../../assets/ui/blue_button03.png'
+import pLogo from "../../assets/logo.png"
+import boxEmpty from "../../assets/ui/grey_box.png"
+import checkBox from "../../assets/ui/blue_boxCheckmark.png"
+import gameMusic from "../../assets/gameMusic.mp3"
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -83,14 +89,13 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
     // load assets needed in our game
-    this.load.image('blueButton1', './assets/ui/blue_button02.png');
-    this.load.image('blueButton2', './assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', './assets/logo.png');
+    this.load.image('blueButton1', blueButton01);
+    this.load.image('blueButton2', blueButton02);
+    this.load.image('phaserLogo', pLogo);
 
-    this.load.image('phaserLogo', './assets/logo.png');
-    this.load.image('box', './assets/ui/grey_box.png');
-    this.load.image('checkedBox', './assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['./assets/gameMusic.mp3']);
+    this.load.image('box', boxEmpty);
+    this.load.image('checkedBox', checkBox);
+    this.load.audio('bgMusic', [gameMusic]);
   }
 
   create() {
