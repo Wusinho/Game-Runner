@@ -26,15 +26,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // this.load.image("sky", "./assets/sky.png");
     this.load.image('rock1', '../../assets/layers/rocks_1.png');
     this.load.image('rock2', '../../assets/layers/rocks_2.png');
     this.load.image('rock3', '../../assets/layers/rocks_3.png');
     this.load.image('sky', '../../assets/layers/sky.png');
     this.load.image('clouds1', '../../assets/layers/clouds_1.png');
-    this.load.image("background", "../../assets/game_background_2.png");
     this.load.image("platform", "./assets/platform.png");
-    // this.load.image("star", "./assets/star.png");
     this.load.image("star", "../../assets/layers/star.png");
     this.load.image("bomb", "./assets/Skull-s.png");
     this.load.spritesheet("player", "./assets/dude.png", {
