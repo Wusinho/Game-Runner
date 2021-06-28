@@ -71,7 +71,7 @@ Run the following comands in the terminal in the next order:
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Wusinho/To-doList).
+Feel free to check the [issues page](https://github.com/Wusinho/Game-Runner/issues).
 
 ## Acknowledgments
 
