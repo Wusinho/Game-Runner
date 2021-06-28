@@ -17,6 +17,26 @@ const gameOptions = {
   score: 0,
   coinPercent: 90,
 };
+
+function sendAndGet() {
+  const promise = Promise.resolve(leaderboard.addScore(getStringLocal()));
+  promise.then(leaderboard.getInfo());
+}
+
+function hitBomb() {
+  this.physics.pause();
+
+  gameOver = true;
+  if (gameOver) {
+    editMethod('default', gameOptions.score, 'score');
+
+    sendAndGet();
+    gameOptions.score = 0;
+
+    this.scene.start('game-over', 'game-over');
+  }
+}
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -180,11 +200,11 @@ export default class GameScene extends Phaser.Scene {
     this.clouds1.tilePositionX += 0.1;
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-600);
-      this.player.x = this.player.x - 200;
+      this.player.x -= 200;
       this.player.anims.play('left', true);
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(600);
-      this.player.x = this.player.x + 200;
+      this.player.x += 200;
 
       this.player.anims.play('right', true);
     } else {
@@ -205,7 +225,7 @@ export default class GameScene extends Phaser.Scene {
 
     // recycling platforms
     let minDistance = config.width;
-    this.platformGroup.getChildren().forEach(function (platform) {
+    this.platformGroup.getChildren().forEach((platform) => {
       const platformDistance = config.width - platform.x - platform.displayWidth / 2;
       minDistance = Math.min(minDistance, platformDistance);
       if (platform.x < -platform.displayWidth / 2) {
@@ -262,23 +282,4 @@ export default class GameScene extends Phaser.Scene {
       }
     }
   }
-}
-
-function hitBomb() {
-  this.physics.pause();
-
-  gameOver = true;
-  if (gameOver) {
-    editMethod('default', gameOptions.score, 'score');
-
-    sendAndGet();
-    gameOptions.score = 0;
-
-    this.scene.start('game-over', 'game-over');
-  }
-}
-
-function sendAndGet() {
-  const promise = Promise.resolve(leaderboard.addScore(getStringLocal()));
-  promise.then((value) => leaderboard.getInfo());
 }

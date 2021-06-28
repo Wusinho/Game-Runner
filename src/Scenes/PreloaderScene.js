@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Phaser from 'phaser';
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -125,18 +126,14 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.menuButton.on(
       'pointerdown',
-      (pointer) => {
-        this.scene.start('Title');
-      },
+      this.scene.start('Title'),
     );
   }
 
   ready() {
     this.scene.start('Title');
-    this.readyCount++;
+    this.readyCount += 1;
     if (this.readyCount === 2) {
-      // this.scene.start("Title");
-
       this.scene.start('Title');
     }
   }
