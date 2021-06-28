@@ -44,7 +44,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    // this.add.image(400, 300, "background");
+    const tableParent = document.getElementById('table')
+    tableParent.className = 'table d-none'
 
     this.air = this.add.tileSprite(10, 60, 0, 0, 'sky')
     this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0,0)
@@ -292,11 +293,7 @@ function hitBomb(player, bomb) {
 }
 
 function sendAndGet(){
-  const sendData = leaderboard.addScore(getStringLocal())
-  const getdata =  async () => {
-    if (sendData){
-      leaderboard.getInfo().then(data => console.log(data))
-    } 
-  }
-    getdata();
+  const promise = Promise.resolve(leaderboard.addScore(getStringLocal()))
+  promise.then((value) => leaderboard.getInfo())
+  
 }

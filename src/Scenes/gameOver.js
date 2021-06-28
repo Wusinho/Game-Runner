@@ -19,6 +19,7 @@ export default class gameOver extends Phaser.Scene {
     texto.setOrigin(0.5, 0.5);
     score.setOrigin(0.5, 0.5);
     creditsName.setOrigin(0.5, 0.5);
+    
     this.menuButton = new Button(
       this,
       400,
