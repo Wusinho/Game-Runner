@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var SRC = path.resolve(__dirname, 'src/index.js');
 
 module.exports = {
   entry: './src/index.js',
@@ -30,7 +31,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
         use: 'file-loader',
       },
       {
@@ -48,7 +49,6 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
       },
-     
     ],
   },
 
