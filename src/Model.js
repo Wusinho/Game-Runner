@@ -1,31 +1,33 @@
+/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+
 export default class Model {
   constructor() {
-    this.soundOn = true;
-    this.musicOn = true;
-    this.bgMusicPlaying = false;
+    this._soundOn = true;
+    this._musicOn = true;
+    this._bgMusicPlaying = false;
   }
 
-  set musicOn(value) {
-    this.musicOn = value;
+  set musicOn(e) {
+    this._musicOn = e;
   }
 
   get musicOn() {
-    return this.musicOn;
+    return this._musicOn;
   }
 
-  set soundOn(value) {
-    this.soundOn = value;
+  set soundOn(e) {
+    this._soundOn = e;
   }
 
   get soundOn() {
-    return this.soundOn;
+    return this._soundOn;
   }
 
-  set bgMusicPlaying(value) {
-    this.bgMusicPlaying = value;
+  set bgMusicPlaying(e) {
+    this._bgMusicPlaying = e;
   }
 
   get bgMusicPlaying() {
-    return this.bgMusicPlaying;
+    return this._bgMusicPlaying;
   }
 }

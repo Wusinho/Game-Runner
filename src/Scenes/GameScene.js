@@ -1,10 +1,8 @@
 import Phaser from 'phaser';
 import config from '../Config/config';
-import { editMethod, getStringLocal, getApi } from '../Modules/editMethod';
+import { editMethod, getStringLocal } from '../Modules/editMethod';
 import leaderboard from '../Modules/apiScore';
 import clearDom from '../Objects/clearDom';
-
-const getTable = document.getElementById('table');
 
 let gameOver = false;
 
@@ -266,7 +264,7 @@ export default class GameScene extends Phaser.Scene {
   }
 }
 
-function hitBomb(player, bomb) {
+function hitBomb() {
   this.physics.pause();
 
   gameOver = true;

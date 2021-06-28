@@ -28,7 +28,7 @@ test("setLocalObject saves information in 'default' key when a value is passed",
   setLocalObject(object);
   const getObjectName = object.user;
   const getLocal = localStorage.getItem('default');
-  expect(getLocal).toBe(`{\"user\":\"${getObjectName}\",\"score\":0}`);
+  expect(getLocal).toBe(`{"user":"${getObjectName}","score":0}`);
 });
 
 test('setLocalObject is passed with no value', () => {

@@ -7,8 +7,6 @@ export default class gameOver extends Phaser.Scene {
     super('game-over');
   }
 
-  preload() {}
-
   create() {
     const text = this.add.text(400, 250, 'GameOver');
     const texto = this.add.text(400, 270, `Thanks for playing ${getLocal().user}`);

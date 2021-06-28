@@ -2,7 +2,6 @@ import './main.scss';
 
 import Phaser from 'phaser';
 import { setLocalObject, getLocal, setDefaultName } from './Modules/editMethod';
-import displayScoreboard from './Modules/displayScoreboard';
 import Model from './Model';
 import config from './Config/config';
 import GameScene from './Scenes/GameScene';
@@ -34,7 +33,7 @@ class Game extends Phaser.Game {
 const getScoreBox = document.getElementById('playerGreeting');
 const getForm = document.getElementById('form');
 
-new Game();
+window.game = new Game();
 setDefaultName();
 getScoreBox.innerText = `Hello ${getLocal().user}`;
 
