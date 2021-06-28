@@ -13,7 +13,7 @@ export default async (obj) => {
 
       if (i < 10) {
         const tableParent = document.getElementById('table')
-      tableParent.className = ' table visible'
+      tableParent.className = ' table table-dark visible'
       const tableElement = document.getElementById('tbody')
 
       const trTag = document.createElement('tr')

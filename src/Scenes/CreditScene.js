@@ -7,11 +7,11 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    this.creditsText = this.add.text(0, 0, "Credits", {
+    this.creditsText = this.add.text(0, 0, "Instructions", {
       fontSize: "32px",
       fill: "#fff",
     });
-    this.madeByText = this.add.text(0, 0, "Created By: Heber Lazo", {
+    this.madeByText = this.add.text(0, 0, "Get all the stars and don't die.", {
       fontSize: "26px",
       fill: "#fff",
     });
@@ -32,7 +32,7 @@ export default class CreditsScene extends Phaser.Scene {
       targets: this.creditsText,
       y: -100,
       ease: "Power1",
-      duration: 3000,
+      duration: 2000,
       delay: 1000,
       onComplete: function () {
         this.destroy;
@@ -43,7 +43,7 @@ export default class CreditsScene extends Phaser.Scene {
       targets: this.madeByText,
       y: -300,
       ease: "Power1",
-      duration: 8000,
+      duration: 5000,
       delay: 1000,
       onComplete: function () {
         this.madeByTween.destroy;

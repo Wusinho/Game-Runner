@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import config from "../Config/config";
 import { editMethod,getStringLocal,getApi } from "../Modules/editMethod";
 import leaderboard from "../Modules/apiScore"
-import displayScoreboard from "../Modules/displayScoreboard"
+import clearDom from "../Objects/clearDom"
 
 
 const getTable = document.getElementById('table');
@@ -46,6 +46,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     const tableParent = document.getElementById('table')
     tableParent.className = 'table d-none'
+    clearDom()
 
     this.air = this.add.tileSprite(10, 60, 0, 0, 'sky')
     this.clouds1 = this.add.tileSprite(0, 0, 0, 0, 'clouds1').setOrigin(0,0)
