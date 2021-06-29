@@ -35,7 +35,8 @@ const getForm = document.getElementById('form');
 
 window.game = new Game();
 setDefaultName();
-getScoreBox.innerText = `Hello ${getLocal().user}`;
+
+getScoreBox.innerText = `Hello ${(getLocal().user)}`;
 
 getForm.addEventListener('submit', (e) => {
   const name = document.getElementById('add-name');
