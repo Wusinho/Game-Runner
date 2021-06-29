@@ -1,6 +1,6 @@
 import Score from '../Score';
 
-const editMethod =(name, newDescription, property) => {
+const editMethod = (name, newDescription, property) => {
   if (name && newDescription && property) {
     let existing = localStorage.getItem(name);
     existing = existing ? JSON.parse(existing) : {};
@@ -8,25 +8,21 @@ const editMethod =(name, newDescription, property) => {
 
     localStorage.setItem(name, JSON.stringify(existing));
   }
-}
+};
 
 const setLocalObject = (value) => {
   if (value) localStorage.setItem('default', JSON.stringify(value));
-}
+};
 
-const getLocal = () => {
-  return JSON.parse(localStorage.getItem('default'));
-}
+const getLocal = () => JSON.parse(localStorage.getItem('default'));
 
-const getStringLocal = () => {
-  return localStorage.getItem('default');
-}
+const getStringLocal = () => localStorage.getItem('default');
 
 const setDefaultName = () => {
   const defaultName = new Score();
   setLocalObject(defaultName);
-}
+};
 
 export {
-  editMethod, setLocalObject, getLocal, getStringLocal, setDefaultName
+  editMethod, setLocalObject, getLocal, getStringLocal, setDefaultName,
 };

@@ -1,5 +1,5 @@
 import {
-  editMethod, setLocalObject, getLocal, setDefaultName
+  editMethod, setLocalObject, getLocal, setDefaultName,
 } from '../Modules/editMethod';
 import Score from '../Score';
 

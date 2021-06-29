@@ -5,20 +5,18 @@ const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/game
 
 const leaderboard = (() => {
   const addScore = async (obj) => {
-    const response = await fetch(url, {
+    await fetch(url, {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
       body: obj,
-    }).then((val) => { return response}).catch((err) => {console.error(err)})
-
-    
+    }).then((val) => (val)).catch((err) => (err));
   };
 
   const getInfo = async () => {
-    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json()).catch((err) => console.error(err));
+    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json()).catch((err) => (err));
 
     displayScoreboard(data.result);
   };
