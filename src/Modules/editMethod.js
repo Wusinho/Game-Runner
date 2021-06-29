@@ -1,6 +1,6 @@
 import Score from '../Score';
 
-function editMethod(name, newDescription, property) {
+const editMethod =(name, newDescription, property) => {
   if (name && newDescription && property) {
     let existing = localStorage.getItem(name);
     existing = existing ? JSON.parse(existing) : {};
@@ -10,19 +10,19 @@ function editMethod(name, newDescription, property) {
   }
 }
 
-function setLocalObject(value) {
+const setLocalObject = (value) => {
   if (value) localStorage.setItem('default', JSON.stringify(value));
 }
 
-function getLocal() {
+const getLocal = () => {
   return JSON.parse(localStorage.getItem('default'));
 }
 
-function getStringLocal() {
+const getStringLocal = () => {
   return localStorage.getItem('default');
 }
 
-function setDefaultName() {
+const setDefaultName = () => {
   const defaultName = new Score();
   setLocalObject(defaultName);
 }
