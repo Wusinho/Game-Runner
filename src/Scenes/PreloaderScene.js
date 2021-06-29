@@ -1,19 +1,19 @@
 /* eslint-disable */
 import Phaser from 'phaser';
-import blueButton01 from '../../assets/ui/blue_button02.png'
-import blueButton02 from '../../assets/ui/blue_button03.png'
-import pLogo from "../../assets/logo.png"
-import boxEmpty from "../../assets/ui/grey_box.png"
-import checkBox from "../../assets/ui/blue_boxCheckmark.png"
-import gameMusic from "../../assets/gameMusic.mp3"
-import rock1 from "../../assets/layers/rocks_1.png"
-import rock2 from "../../assets/layers/rocks_2.png"
-import skyX from "../../assets/layers/sky.png"
-import clouds1 from "../../assets/layers/clouds_1.png"
-import platform from "../../assets/platform.png"
-import star from "../../assets/layers/star.png"
-import bomb from "../../assets/Skull-s.png"
-import dude from "../../assets/dude.png"
+// import blueButton01 from '../../assets/ui/blue_button02.png'
+// import blueButton02 from '../../assets/ui/blue_button03.png'
+// import pLogo from "../../assets/logo.png"
+// import boxEmpty from "../../assets/ui/grey_box.png"
+// import checkBox from "../../assets/ui/blue_boxCheckmark.png"
+// import gameMusic from "../../assets/gameMusic.mp3"
+// import rock1 from "../../assets/layers/rocks_1.png"
+// import rock2 from "../../assets/layers/rocks_2.png"
+// import skyX from "../../assets/layers/sky.png"
+// import clouds1 from "../../assets/layers/clouds_1.png"
+// import platform from "../../assets/platform.png"
+// import star from "../../assets/layers/star.png"
+// import bomb from "../../assets/Skull-s.png"
+// import dude from "../../assets/dude.png"
 
 
 
@@ -99,6 +99,25 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
     // load assets needed in our game
+    this.load.image('blueButton1', "./assets/ui/blue_button02.png");
+    this.load.image('blueButton2', "./assets/ui/blue_button03.png");
+    this.load.image('phaserLogo', "./assets/logo.png");
+    this.load.image('box', "./assets/ui/grey_box.png");
+    this.load.image('checkedBox', "./assets/ui/blue_boxCheckmark.png");
+    this.load.audio('bgMusic', "./assets/gameMusic.mp3" );
+
+    this.load.image('rock1', './assets/layers/rocks_1.png');
+    this.load.image('rock2', './assets/layers/rocks_2.png');
+    this.load.image('sky', './assets/layers/sky.png');
+    this.load.image('clouds1', './assets/layers/clouds_1.png');
+    this.load.image('platform', './assets/platform.png');
+    this.load.image('star', './assets/layers/star.png');
+    this.load.image('bomb', './assets/Skull-s.png');
+    this.load.spritesheet('player', './assets/dude.png', {
+      frameWidth: 32,
+      frameHeight: 48,
+    });
+    // load assets needed in our game
     // this.load.image('blueButton1', "../../assets/ui/blue_button02.png");
     // this.load.image('blueButton2', "../../assets/ui/blue_button03.png");
     // this.load.image('phaserLogo', "../../assets/logo.png");
@@ -117,24 +136,24 @@ export default class PreloaderScene extends Phaser.Scene {
     //   frameWidth: 32,
     //   frameHeight: 48,
     // });
-    this.load.image('blueButton1', blueButton01);
-    this.load.image('blueButton2', blueButton02);
-    this.load.image('phaserLogo', pLogo);
-    this.load.image('box', boxEmpty);
-    this.load.image('checkedBox', checkBox);
-    this.load.audio('bgMusic', gameMusic );
+    // this.load.image('blueButton1', blueButton01);
+    // this.load.image('blueButton2', blueButton02);
+    // this.load.image('phaserLogo', pLogo);
+    // this.load.image('box', boxEmpty);
+    // this.load.image('checkedBox', checkBox);
+    // this.load.audio('bgMusic', gameMusic );
 
-    this.load.image('rock1', rock1);
-    this.load.image('rock2', rock2);
-    this.load.image('sky', skyX);
-    this.load.image('clouds1', clouds1);
-    this.load.image('platform', platform);
-    this.load.image('star', star);
-    this.load.image('bomb', bomb);
-    this.load.spritesheet('player', dude, {
-      frameWidth: 32,
-      frameHeight: 48,
-    });
+    // this.load.image('rock1', rock1);
+    // this.load.image('rock2', rock2);
+    // this.load.image('sky', skyX);
+    // this.load.image('clouds1', clouds1);
+    // this.load.image('platform', platform);
+    // this.load.image('star', star);
+    // this.load.image('bomb', bomb);
+    // this.load.spritesheet('player', dude, {
+    //   frameWidth: 32,
+    //   frameHeight: 48,
+    // });
   }
 
   create() {
