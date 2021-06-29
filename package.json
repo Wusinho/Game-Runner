@@ -29,6 +29,7 @@
   "homepage": "https://github.com/Wusinho/Game-Runner#readme",
   "dependencies": {
     "audio-loader": "^1.0.3",
+    "bootstrap": "^5.0.2",
     "jquery": "^3.6.0",
     "node-fetch": "^2.6.1",
     "phaser": "^3.55.2",
@@ -40,7 +41,6 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.0.5",
     "babel-polyfill": "^6.26.0",
-    "bootstrap": "^5.0.2",
     "css-loader": "^5.2.6",
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -51,7 +51,6 @@
     "jest": "^27.0.5",
     "jest-localstorage-mock": "^2.4.14",
     "raw-loader": "^4.0.2",
-    "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.1",
@@ -61,7 +60,6 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.40.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.8.0"
+    "webpack-dev-server": "^3.11.2"
   }
 }
