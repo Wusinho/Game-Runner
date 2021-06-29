@@ -9,7 +9,6 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // Game
 
     this.gameButton = new Button(
       this,
@@ -20,7 +19,6 @@ export default class TitleScene extends Phaser.Scene {
       'Play',
       'Game',
     );
-    // Options
 
     this.optionsButton = new Button(
       this,
@@ -32,7 +30,6 @@ export default class TitleScene extends Phaser.Scene {
       'Options',
     );
 
-    // Credits
 
     this.creditsButton = new Button(
       this,
