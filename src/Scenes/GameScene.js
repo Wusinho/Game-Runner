@@ -169,13 +169,11 @@ export default class GameScene extends Phaser.Scene {
       !this.dying
       && (touchDowm || (playerJumps > 0 && playerJumps < gameOptions.jumps))
     ) {
-      // this.jumpSound.play();
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
       }
       this.player.setVelocityY(gameOptions.jumpForce * -1);
       this.playerJumps += 1;
-      // this.player.anims.play("jump");
     }
   }
 
@@ -197,7 +195,6 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.play('right', true);
     }
 
-    // gameOver
     if (this.player.y > config.height) {
       editMethod('default', gameOptions.score, 'score');
 
@@ -208,7 +205,6 @@ export default class GameScene extends Phaser.Scene {
     }
     this.player.x = gameOptions.playerStartPosition;
 
-    // recycling platforms
     let minDistance = config.width;
     this.platformGroup.getChildren().forEach((platform) => {
       const platformDistance = config.width - platform.x - platform.displayWidth / 2;
@@ -219,7 +215,6 @@ export default class GameScene extends Phaser.Scene {
       }
     }, this);
 
-    // adding new platforms
     if (minDistance > this.nextPlatformDistance) {
       const nextPlatformWidth = Phaser.Math.Between(
         gameOptions.platformSizeRange[0],
@@ -251,10 +246,6 @@ export default class GameScene extends Phaser.Scene {
     if (Phaser.Math.Between(1, 50) <= gameOptions.coinPercent) {
       if (this.starPool.getLength()) {
         const star = this.starPool.getFirst();
-        // star.x = posX;
-        // star.alpha = 1;
-        // star.active = true;
-        // star.visible = true;
         this.starPool.remove(star);
       } else {
         const star = this.physics.add.sprite(posX, 96, 'star');

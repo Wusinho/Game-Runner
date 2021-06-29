@@ -2,11 +2,20 @@
 
 ## About
 
-This is a platform runner game developed using Phaser 3 library. The main character has to jump from the platform in a valley, using a parallax scrolling background. 
+This is a platform runner game developed using Phaser 3 library. The main character has to stay safe jumping between platforms and avoiding bombs.
 
-The score is increased, for each star and a new bomb spawns every time a star is collected.
+The score is increased by catching stars and a new bomb spawns every time a star is collected.
 
 You can get a guest name or you can provide one, and once the player dies, your score will be submitted to leaderboard API, only the 10 top scores will appear.
+
+My initial objectives for this game were:
+
+- Make the game functional
+- Make the game fun
+- Make the game appealing
+
+So far, it is functional and appealing, it is needed more time to achieve all the objectives. 
+This could be achieved with more scenes with a more complex story and better animations.
 
 
 ![screenshot](./assets/ScreenShot.png)
@@ -54,11 +63,13 @@ Run the following comands in the terminal in the next order:
 ### To run the tests for this project in your local environment
 
 - Step1:
-  $ cd npm run watch
+  $ npm run watch
 
 - Step2:
   press key 'a' from keyboard to run all test
   $ a
+
+![screenshot](./assets/Test-pass.png)
 
 ## Authors
 

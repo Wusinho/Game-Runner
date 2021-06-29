@@ -1,6 +1,5 @@
-/* eslint-disable */
 import Phaser from 'phaser';
-import config from '../Config/config';
+import Button from '../Objects/Button';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
@@ -8,48 +7,23 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    this.creditsText = this.add.text(0, 0, 'Instructions', {
-      fontSize: '32px',
-      fill: '#fff',
-    });
-    this.madeByText = this.add.text(0, 0, "Get all the stars and don't die.", {
-      fontSize: '26px',
-      fill: '#fff',
-    });
-    this.zone = this.add.zone(
-      config.width / 2,
-      config.height / 2,
-      config.width,
-      config.height,
+    const text = this.add.text(400, 150, 'Instructions');
+    const texto = this.add.text(400, 270, 'Jump using left click on your mouse, you can do it 2 times');
+    const score = this.add.text(400, 290, 'You get points when you get the coins');
+    const creditsName = this.add.text(400, 330, 'Evade the bombs and do not fall from the platforms');
+    text.setOrigin(0.5, 0.5);
+    texto.setOrigin(0.5, 0.5);
+    score.setOrigin(0.5, 0.5);
+    creditsName.setOrigin(0.5, 0.5);
+
+    this.menuButton = new Button(
+      this,
+      400,
+      500,
+      'blueButton1',
+      'blueButton2',
+      'Menu',
+      'Title',
     );
-
-    Phaser.Display.Align.In.Center(this.creditsText, this.zone);
-
-    Phaser.Display.Align.In.Center(this.madeByText, this.zone);
-
-    this.madeByText.setY(1000);
-
-    this.creditsTween = this.tweens.add({
-      targets: this.creditsText,
-      y: -100,
-      ease: 'Power1',
-      duration: 2000,
-      delay: 1000,
-      onComplete() {
-        this.destroy;
-      },
-    });
-
-    this.madeByTween = this.tweens.add({
-      targets: this.madeByText,
-      y: -300,
-      ease: 'Power1',
-      duration: 5000,
-      delay: 1000,
-      onComplete: function () {
-        this.madeByTween.destroy;
-        this.scene.start('Title');
-      }.bind(this),
-    });
   }
 }

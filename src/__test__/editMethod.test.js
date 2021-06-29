@@ -1,21 +1,14 @@
 import {
-  editMethod, setLocalObject, getLocal, setDefaultName, getApi,
+  editMethod, setLocalObject, getLocal, setDefaultName,
 } from '../Modules/editMethod';
 import Score from '../Score';
-import leaderboard from '../Modules/apiScore';
 
 const object = new Score();
 
 test("getLocal method if 'default' doesn't exist", () => {
   const lolcalParse = getLocal();
 
-  expect(lolcalParse).toBe(undefined);
-});
-
-test("Api method if 'default' doesn't exist", () => {
-  const lolcalParse = getApi();
-
-  expect(lolcalParse).toBe(undefined);
+  expect(lolcalParse).toBe(null);
 });
 
 test("editMethod method if 'default' doesn't exist", () => {
@@ -46,16 +39,6 @@ test("getLocal returns 'default' key from localStorage as an object", () => {
 
   expect(lolcalParse.user).toBe(getObjectName);
   expect(lolcalParse.score).toBe(0);
-  expect(getisObj).toBe('object');
-});
-
-test('getApi returns an Object', () => {
-  leaderboard.addScore({ user: 'Guess7896', score: 0 });
-
-  const getApiValues = getApi();
-
-  const getisObj = typeof getApiValues;
-
   expect(getisObj).toBe('object');
 });
 

@@ -22,13 +22,7 @@ module.exports = {
         test: [/\.vert$/, /\.frag$/],
         use: 'raw-loader',
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
+      
       {
         // test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
         // use: 'file-loader',

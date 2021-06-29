@@ -9,7 +9,6 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // Game
 
     this.gameButton = new Button(
       this,
@@ -20,7 +19,6 @@ export default class TitleScene extends Phaser.Scene {
       'Play',
       'Game',
     );
-    // Options
 
     this.optionsButton = new Button(
       this,
@@ -32,7 +30,6 @@ export default class TitleScene extends Phaser.Scene {
       'Options',
     );
 
-    // Credits
 
     this.creditsButton = new Button(
       this,
@@ -40,7 +37,7 @@ export default class TitleScene extends Phaser.Scene {
       config.height / 2 + 100,
       'blueButton1',
       'blueButton2',
-      'GameBook',
+      'Rules',
       'Credits',
     );
 
