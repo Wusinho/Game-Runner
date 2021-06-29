@@ -12,13 +12,13 @@ const leaderboard = (() => {
       },
       method: 'POST',
       body: obj,
-    });
+    }).then((val) => { return response}).catch((err) => {console.error(err)})
 
-    return response;
+    
   };
 
   const getInfo = async () => {
-    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
+    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json()).catch((err) => console.error(err));
 
     displayScoreboard(data.result);
   };
