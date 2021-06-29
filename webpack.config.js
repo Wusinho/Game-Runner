@@ -15,7 +15,14 @@ module.exports = {
 
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: 'url-loader',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'image/png',
+            },
+          },
+        ],
       },
 
       {
