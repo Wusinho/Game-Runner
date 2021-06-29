@@ -99,21 +99,21 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
     // load assets needed in our game
-    this.load.image('blueButton1', "./assets/ui/blue_button02.png");
-    this.load.image('blueButton2', "./assets/ui/blue_button03.png");
-    this.load.image('phaserLogo', "./assets/logo.png");
-    this.load.image('box', "./assets/ui/grey_box.png");
-    this.load.image('checkedBox', "./assets/ui/blue_boxCheckmark.png");
-    this.load.audio('bgMusic', "./assets/gameMusic.mp3" );
+    this.load.image('blueButton1', "../assets/ui/blue_button02.png");
+    this.load.image('blueButton2', "../assets/ui/blue_button03.png");
+    this.load.image('phaserLogo', "../assets/logo.png");
+    this.load.image('box', "../assets/ui/grey_box.png");
+    this.load.image('checkedBox', "../assets/ui/blue_boxCheckmark.png");
+    this.load.audio('bgMusic', "../assets/gameMusic.mp3" );
 
-    this.load.image('rock1', './assets/layers/rocks_1.png');
-    this.load.image('rock2', './assets/layers/rocks_2.png');
-    this.load.image('sky', './assets/layers/sky.png');
-    this.load.image('clouds1', './assets/layers/clouds_1.png');
-    this.load.image('platform', './assets/platform.png');
-    this.load.image('star', './assets/layers/star.png');
-    this.load.image('bomb', './assets/Skull-s.png');
-    this.load.spritesheet('player', './assets/dude.png', {
+    this.load.image('rock1', '../assets/layers/rocks_1.png');
+    this.load.image('rock2', '../assets/layers/rocks_2.png');
+    this.load.image('sky', '../assets/layers/sky.png');
+    this.load.image('clouds1', '../assets/layers/clouds_1.png');
+    this.load.image('platform', '../assets/platform.png');
+    this.load.image('star', '../assets/layers/star.png');
+    this.load.image('bomb', '../assets/Skull-s.png');
+    this.load.spritesheet('player', '../assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
     });
