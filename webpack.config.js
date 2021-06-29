@@ -30,7 +30,9 @@ module.exports = {
         },
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+        // test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+        // use: 'file-loader',
+        test: /\.(gif|png|jpe?g|svg|xml)$/i,
         use: 'file-loader',
       },
       {
