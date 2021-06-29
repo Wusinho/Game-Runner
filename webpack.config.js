@@ -1,8 +1,7 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+const config = {
   entry: './src/index.js',
 
   output: {
@@ -64,3 +63,5 @@ module.exports = {
     }),
   ],
 };
+
+module.exports = config;
