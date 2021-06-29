@@ -20,7 +20,6 @@ const leaderboard = (() => {
   const getInfo = async () => {
     const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
-    // localStorage.setItem('Api', JSON.stringify(data.result))
     displayScoreboard(data.result);
   };
 
