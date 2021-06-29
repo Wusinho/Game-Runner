@@ -22,15 +22,11 @@ function getStringLocal() {
   return localStorage.getItem('default');
 }
 
-function getApi() {
-  return JSON.parse(localStorage.getItem('Api'));
-}
-
 function setDefaultName() {
   const defaultName = new Score();
   setLocalObject(defaultName);
 }
 
 export {
-  editMethod, setLocalObject, getLocal, getStringLocal, setDefaultName, getApi,
+  editMethod, setLocalObject, getLocal, getStringLocal, setDefaultName
 };

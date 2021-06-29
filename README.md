@@ -69,6 +69,8 @@ Run the following comands in the terminal in the next order:
   press key 'a' from keyboard to run all test
   $ a
 
+![screenshot](./assets/Test-pass.png)
+
 ## Authors
 
 👤 **Heber Lazo**
